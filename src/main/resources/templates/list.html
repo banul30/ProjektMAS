@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>ACME HR Demo</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+    <script>
+
+        function f1 (parametr1) {
+       var tab1= document.getElementsByClassName("nowaKlasa");
+       for (var i =0;i<tab1.length;i++) {
+           tab1[i].style.display = 'none'
+       }
+        var theDiv = document.getElementById(parametr1);
+       theDiv.style.display = 'block'
+    }
+    </script>
+
+</head>
+<body>
+<header>
+ <h1>Przedsiebiorstwo tramwajowe szynex </h1>
+
+   <img src="../static/images/logo.png" th:src="@{/images/logo.png}" alt="gowno">
+
+
+</header>
+<main>
+    <h2>Lista Osob</h2>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>data urodzenia</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+   <tr th:each="pasazer:${pasazerowie}">
+       <td th:text="${pasazer.getIdPasazer()}"></td>
+       <td th:text="${pasazer.getImie()}"></td>
+       <td th:text="${pasazer.getNazwisko()}"></td>
+       <td th:text="${pasazer.getDataUrodzenia()}"></td>
+
+       <td>
+           <ul class="list-actions">
+               <li>
+                   <button class="list-actions-button-details" th:onclick="'f1(\''+ ${pasazer.getIdPasazer()} +'\');'">pokaz bilety </button>
+               </li>
+           </ul>
+       </td>
+   </tr>
+
+        </tbody>
+    </table>
+
+
+<div th:each="pasazer:${pasazerowie}">
+
+    <div th:id ="${pasazer.getIdPasazer()} " style="display: none"  class="nowaKlasa">
+
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th>Rodzaj ulgi</th>
+                <th>Data waznosci</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bilet:${pasazer.getBilety()}">
+
+                <td th:text="${bilet.getRodzajUlgi()  } "> </td>
+             <td th:text=" ${bilet.getDataWaznosci()  } "> </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+</div>
+
+    
+    <a th:href="@{/api/gui/mandat/add}" class="button-add add-new">Wystaw mandat</a>
+    <div class="clear"></div>
+    
+</main>
+<footer>
+SZYNEX SA
+</footer>   
+</body>
+</html>

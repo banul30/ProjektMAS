@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>ACME HR Demo</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+
+
+</head>
+<body>
+<header>
+    <div class="centrowanie">
+        <h1>Przedsiębiorstwo tramwajowe szynex </h1>
+        <img src="../static/images/logo.png" th:src="@{/images/logo.png}" alt="gowno">
+    </div>
+
+</header>
+
+
+<main>
+    <h2>Wystaw mandat</h2>
+    <form method="POST" th:action="@{/api/gui/mandat/add}" th:object="${mandatInputData}" class="form" >
+
+
+        <div class="flex-container">
+
+            <div class="textfield">
+                <label for="idPasazer">IdPasazer: </label>
+                <input id = "idPasazer" type="text" th:field="*{idPasazer}" />
+            </div>
+
+            <div class="textfield">
+                <label for="idKontroler">IdKontroler: </label>
+                <input id = "idKontroler" type="text" th:field="*{idKontroler}" />
+            </div>
+
+            <div class="textfield">
+                <label for="kwota">Kwota: </label>
+                <input id = "kwota" type="number" th:field="*{kwota}" />
+            </div>
+
+
+            <label for="czyoplacony">Czy oplacony </label>
+
+            <input id = "czyoplacony" type="checkbox" name="czyOplacony" th:checked="${mandatInputData.czyOplacony}" />
+
+
+
+
+            <div class="clear"></div>
+
+        <div class="buttons-modify">
+            <input class="button-add" th:action ="submit "type="submit" value="Wystaw"/>
+            <a class = "button-cancel" th:href="@{/api/gui/pasazer/get}">Anuluj</a>
+        </div>
+
+        <div class="clear"></div>
+
+    </form>
+</main>
+<footer>
+    SZYNEX SA
+</footer>
+</body>
+</html>
